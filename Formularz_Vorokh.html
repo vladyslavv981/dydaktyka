@@ -9,7 +9,65 @@
                     <table> 
                           <!-- <caption>Formularz Vorokh Vladyslav 2G2</caption>-->
                           <h1>Ankieta społeczna</h1>
-         
+         <!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ankieta Społeczna</title>
+</head>
+<body>
+    <h1>Ankieta społeczna</h1>
+    <form action="#" method="post">
+        <label>1. Podaj imię i nazwisko:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>2. Podaj adres e-mail:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>3. Podaj wiek:</label><br>
+        <input type="number" name="age" min="1" required><br><br>
+
+        <label>4. Chciałbyś zostać programistą?</label><br>
+        <input type="radio" name="programmer" value="tak" required> Tak
+        <input type="radio" name="programmer" value="nie"> Nie<br><br>
+
+        <label>5. Ulubiony system operacyjny:</label><br>
+        <input type="radio" name="os" value="windows" required> Windows<br>
+        <input type="radio" name="os" value="linux"> Linux<br>
+        <input type="radio" name="os" value="ios"> iOS<br><br>
+
+        <label>6. Jaki rodzaj książek czytasz?</label><br>
+        <input type="checkbox" name="books" value="literatura_piekna"> Literatura piękna<br>
+        <input type="checkbox" name="books" value="fantasy"> Fantasy<br>
+        <input type="checkbox" name="books" value="science_fiction"> Science fiction<br>
+        <input type="checkbox" name="books" value="kryminal"> Kryminał<br>
+        <input type="checkbox" name="books" value="literatura_podroznicza"> Literatura podróżnicza<br><br>
+
+        <label>7. Ulubiony rodzaj muzyki:</label><br>
+        <input type="checkbox" name="music" value="rock"> Rock<br>
+        <input type="checkbox" name="music" value="pop"> Pop<br>
+        <input type="checkbox" name="music" value="muzyka_elektroniczna"> Muzyka elektroniczna<br>
+        <input type="checkbox" name="music" value="muzyka_klasyczna"> Muzyka klasyczna<br><br>
+
+        <label>8. Ulubiony rodzaj literacki:</label><br>
+        <input type="radio" name="literature" value="epika" required> Epika<br>
+        <input type="radio" name="literature" value="liryka"> Liryka<br>
+        <input type="radio" name="literature" value="dramat"> Dramat<br><br>
+
+        <label>9. Skąd dowiedziałeś się o naszej ankiecie?</label><br>
+        <input type="checkbox" name="source" value="reklamy"> Reklamy<br>
+        <input type="checkbox" name="source" value="znajomi"> Znajomi<br><br>
+
+        <label>10. Jak oceniasz naszą ankietę w skali od 1 do 10?</label><br>
+        <input type="number" name="rating" min="1" max="10" required><br><br>
+
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+</body>
+</html>
+                          
                           
                                                 <A HREF="index.html"> Wróć </A>
                     
