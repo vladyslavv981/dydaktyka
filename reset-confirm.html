@@ -4,23 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Potwierdzenie resetu</title>
+    <style>
+        /* Styl przycisku */
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Modalne okno */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .modal-buttons button {
+            margin: 5px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Czy na pewno chcesz zresetować formularz?</h1>
-    <button id="confirmReset">Tak</button>
-    <button id="cancelReset">Nie</button>
+    <form id="surveyForm">
+        <h1>Ankieta społeczna</h1>
+        <button type="button" id="resetButton">Resetuj</button>
+    </form>
+
+    <!-- Modalne okno z pytaniem o reset -->
+    <div id="resetModal" class="modal">
+        <div class="modal-content">
+            <p>Czy na pewno chcesz zresetować formularz?</p>
+            <div class="modal-buttons">
+                <button id="confirmReset">Tak</button>
+                <button id="cancelReset">Nie</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        document.getElementById('confirmReset').addEventListener('click', () => {
-    form.reset();
-    window.history.back();
-});
-            sessionStorage.setItem('resetForm', 'true');
-            window.location.href = "Formularz_Vorokh.html";
+        const resetButton = document.getElementById('resetButton');
+        const resetModal = document.getElementById('resetModal');
+        const confirmReset = document.getElementById('confirmReset');
+        const cancelReset = document.getElementById('cancelReset');
+
+        // Kliknięcie "Resetuj" otwiera modal
+        resetButton.addEventListener('click', () => {
+            resetModal.style.display = 'block';
         });
 
-        document.getElementById('cancelReset').addEventListener('click', () => {
-            window.location.href = "Formularz_Vorokh.html";
+        // Kliknięcie "Tak" cofa użytkownika do poprzedniej strony
+        confirmReset.addEventListener('click', () => {
+            window.history.back(); // Powrót do poprzedniej strony
+        });
+
+        // Kliknięcie "Nie" zamyka modal
+        cancelReset.addEventListener('click', () => {
+            resetModal.style.display = 'none';
+        });
+
+        // Kliknięcie poza modalem zamyka modal
+        window.addEventListener('click', (event) => {
+            if (event.target === resetModal) {
+                resetModal.style.display = 'none';
+            }
         });
     </script>
 </body>
