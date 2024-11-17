@@ -11,16 +11,16 @@
     <button id="cancelReset">Nie</button>
 
     <script>
-        // Obsługa kliknięcia "Tak"
         document.getElementById('confirmReset').addEventListener('click', () => {
-            // Resetuj formularz i wróć do głównej strony
-            sessionStorage.setItem('resetForm', 'true'); // Ustaw flagę
-            window.location.href = "index.html"; // Wróć na stronę główną
+    form.reset();
+    window.history.back();
+});
+            sessionStorage.setItem('resetForm', 'true');
+            window.location.href = "Formularz_Vorokh.html";
         });
 
-        // Obsługa kliknięcia "Nie"
         document.getElementById('cancelReset').addEventListener('click', () => {
-            window.location.href = "index.html"; // Wróć na stronę główną bez resetu
+            window.location.href = "Formularz_Vorokh.html";
         });
     </script>
 </body>
