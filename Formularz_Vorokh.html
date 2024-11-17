@@ -151,9 +151,15 @@
             <div class="button-container">
                 <button type="button"><A HREF="index.html">Return</A></button>
                 <A HREF="Dzieki_za_wypelnienie_ankiety.html"><button type="submit">Submit</A></button>
-                <A HREF="resetowanie.html"><button type="reset">Reset</A></button>
+                 <button type="button" id="resetButton" onclick="openResetPage()">Resetuj</button>
+        <button type="submit">Wyślij</button>
             </div>
         </form>
     </div>
+    <script>
+        function openResetPage() {
+            window.location.href = "reset-confirm.html";
+        }
+    </script>
 </body>
                                                                                               </html>
