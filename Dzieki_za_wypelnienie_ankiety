@@ -6,6 +6,6 @@
                                <title>Dziekuję za wypełnienie ankiety</title>
      </head>
   <body>
-<p align="centre"Dziękuje za wypełnienie ankiety
+<p align="centre"> <font color="red" size="7" face="Arial">Dziękuje za wypełnienie ankiety</p>
 </body>
 </html>
