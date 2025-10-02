@@ -9,4 +9,165 @@
           <A HREF="index.html">wróć </A> 
              <A href ="mailto:vladyslavv@gmail.com"><img src="12345678.gif" border=0 width=70 height=50>poczta do ucznia Vorokh</A> <br>
       </body>
+
 </html>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Algorytm Suma 1..N
+int sumaDoN(int N) {
+    int suma = 0;
+    for (int i = 1; i <= N; i++) suma += i;
+    return suma;
+}
+
+// Algorytm Parzysta
+bool parzysta(int N) {
+    return N % 2 == 0;
+}
+
+// Algorytm Największa (w tablicy)
+int maxElement(const vector<int>& A) {
+    int maks = A[0];
+    for (int i = 1; i < A.size(); i++)
+        if (A[i] > maks) maks = A[i];
+    return maks;
+}
+
+// Algorytm Minimum (w tablicy)
+int minElement(const vector<int>& A) {
+    int mini = A[0];
+    for (int i = 1; i < A.size(); i++)
+        if (A[i] < mini) mini = A[i];
+    return mini;
+}
+
+// Algorytm SumaTablicy
+int sumaTablicy(const vector<int>& A) {
+    int suma = 0;
+    for (int x : A) suma += x;
+    return suma;
+}
+
+// Algorytm Średnia
+double srednia(const vector<int>& A) {
+    int suma = 0;
+    for (int x : A) suma += x;
+    return (double)suma / A.size();
+}
+
+// Algorytm Szukaj
+int szukaj(const vector<int>& A, int X) {
+    for (int i = 0; i < A.size(); i++)
+        if (A[i] == X) return i; // indeks
+    return -1; // brak
+}
+
+// Algorytm Sortowanie Bąbelkowe
+void bubbleSort(vector<int>& A) {
+    bool zmiana;
+    do {
+        zmiana = false;
+        for (int i = 0; i < A.size() - 1; i++) {
+            if (A[i] > A[i+1]) {
+                swap(A[i], A[i+1]);
+                zmiana = true;
+            }
+        }
+    } while (zmiana);
+}
+
+// Algorytm Liczba Pierwsza
+bool pierwsza(int N) {
+    if (N < 2) return false;
+    for (int i = 2; i * i <= N; i++)
+        if (N % i == 0) return false;
+    return true;
+}
+
+// Algorytm NWD (wersja z resztą)
+int NWD(int a, int b) {
+    while (b != 0) {
+        int r = a % b;
+        a = b;
+        b = r;
+    }
+    return a;
+}
+
+int main() {
+    int wybor;
+    do {
+        cout << "\n=== MENU ALGORYTMÓW ===\n";
+        cout << "1. Suma liczb od 1 do N\n";
+        cout << "2. Sprawdzenie parzystości\n";
+        cout << "3. Największy element tablicy\n";
+        cout << "4. Najmniejszy element tablicy\n";
+        cout << "5. Suma tablicy\n";
+        cout << "6. Średnia tablicy\n";
+        cout << "7. Wyszukiwanie elementu\n";
+        cout << "8. Sortowanie bąbelkowe\n";
+        cout << "9. Sprawdzenie czy liczba pierwsza\n";
+        cout << "10. NWD dwóch liczb\n";
+        cout << "0. Wyjście\n";
+        cout << "Wybierz opcję: ";
+        cin >> wybor;
+
+        if (wybor == 1) {
+            int N; cout << "Podaj N: "; cin >> N;
+            cout << "Suma od 1 do " << N << " = " << sumaDoN(N) << endl;
+        }
+        else if (wybor == 2) {
+            int N; cout << "Podaj liczbę: "; cin >> N;
+            cout << (parzysta(N) ? "TAK" : "NIE") << endl;
+        }
+        else if (wybor == 3) {
+            int n; cout << "Podaj rozmiar tablicy: "; cin >> n;
+            vector<int> A(n); for (int i = 0; i < n; i++) cin >> A[i];
+            cout << "Największy element = " << maxElement(A) << endl;
+        }
+        else if (wybor == 4) {
+            int n; cout << "Podaj rozmiar tablicy: "; cin >> n;
+            vector<int> A(n); for (int i = 0; i < n; i++) cin >> A[i];
+            cout << "Najmniejszy element = " << minElement(A) << endl;
+        }
+        else if (wybor == 5) {
+            int n; cout << "Podaj rozmiar tablicy: "; cin >> n;
+            vector<int> A(n); for (int i = 0; i < n; i++) cin >> A[i];
+            cout << "Suma elementów = " << sumaTablicy(A) << endl;
+        }
+        else if (wybor == 6) {
+            int n; cout << "Podaj rozmiar tablicy: "; cin >> n;
+            vector<int> A(n); for (int i = 0; i < n; i++) cin >> A[i];
+            cout << "Średnia = " << srednia(A) << endl;
+        }
+        else if (wybor == 7) {
+            int n, x; cout << "Podaj rozmiar tablicy: "; cin >> n;
+            vector<int> A(n); for (int i = 0; i < n; i++) cin >> A[i];
+            cout << "Podaj szukaną liczbę: "; cin >> x;
+            int idx = szukaj(A, x);
+            if (idx == -1) cout << "Nie znaleziono\n";
+            else cout << "Znaleziono na pozycji: " << idx << endl;
+        }
+        else if (wybor == 8) {
+            int n; cout << "Podaj rozmiar tablicy: "; cin >> n;
+            vector<int> A(n); for (int i = 0; i < n; i++) cin >> A[i];
+            bubbleSort(A);
+            cout << "Posortowana tablica: ";
+            for (int x : A) cout << x << " ";
+            cout << endl;
+        }
+        else if (wybor == 9) {
+            int N; cout << "Podaj liczbę: "; cin >> N;
+            cout << (pierwsza(N) ? "PRAWDA" : "FAŁSZ") << endl;
+        }
+        else if (wybor == 10) {
+            int a, b; cout << "Podaj dwie liczby: "; cin >> a >> b;
+            cout << "NWD(" << a << "," << b << ") = " << NWD(a, b) << endl;
+        }
+
+    } while (wybor != 0);
+
+    return 0;
+}
