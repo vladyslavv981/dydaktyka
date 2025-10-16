@@ -156,81 +156,46 @@
         </form>
     </div>
 </body>
-    #include <iostream>
-#include <string>
-#include <cmath>
-
+</html>
+#include <iostream>
+#include <cmath> // Możliwe, że była, chociaż nieużywana w widocznym kodzie
 using namespace std;
 
-// Funkcja zamienia liczbę binarną (string) na dziesiętną
-int binarnyNaDziesietny(const string &bin)
-{
-    int dziesietna = 0;
-    int potega = 1; // 2^0
+int main() {
+    int NUM, TAB[4], BUF, DIV=1000;
+    cout << "podaj liczbe: ";
+    cin >> NUM;
 
-    // Iterujemy od końca (najmniej znaczący bit)
-    for (int i = bin.size() - 1; i >= 0; i--)
-    {
-        if (bin[i] == '1')
-            dziesietna += potega;
-        else if (bin[i] != '0')
-        {
-            cout << "Niepoprawny znak w liczbie binarnej!\n";
-            return -1;
-        }
-        potega *= 2;
-    }
-
-    return dziesietna;
-}
-
-// Funkcja zamienia liczbę dziesiętną na binarną (string)
-string dziesietnyNaBinarny(int dziesietna)
-{
-    if (dziesietna == 0)
-        return "0";
-
-    string bin = "";
-    while (dziesietna > 0)
-    {
-        bin = (dziesietna % 2 == 0 ? "0" : "1") + bin;
-        dziesietna /= 2;
-    }
-
-    return bin;
-}
-
-int main()
-{
-    int wybor;
-    cout << "=== KONWERTER BINARNY <-> DZIESIETNY ===\n";
-    cout << "1. Binarny -> Dziesietny\n";
-    cout << "2. Dziesietny -> Binarny\n";
-    cout << "Wybierz opcje: ";
-    cin >> wybor;
-
-    if (wybor == 1)
-    {
-        string bin;
-        cout << "Podaj liczbe binarna: ";
-        cin >> bin;
-        int wynik = binarnyNaDziesietny(bin);
-        if (wynik != -1)
-            cout << "Liczba dziesietna: " << wynik << endl;
-    }
-    else if (wybor == 2)
-    {
-        int dziesietna;
-        cout << "Podaj liczbe dziesietna: ";
-        cin >> dziesietna;
-        cout << "Liczba binarna: " << dziesietnyNaBinarny(dziesietna) << endl;
-    }
-    else
-    {
-        cout << "Niepoprawny wybor!\n";
-    }
-
+    // for (int i=0; i<4; i++) {
+    //     BUF = NUM / DIV;
+    //     NUM = NUM % DIV;
+    //     TAB[i] = BUF;
+    //     DIV = DIV / 10;
+    //     cout << TAB[i] << endl;
+    // }
+    
+    // int i=0;
+    // while (i<4) {
+    //     BUF = NUM / DIV;
+    //     NUM = NUM % DIV;
+    //     TAB[i] = BUF;
+    //     DIV = DIV / 10;
+    //     cout << TAB[i] << endl;
+    //     i++;
+    // }
+    
+    // int i=0;
+    // do {
+    //     BUF = NUM / DIV;
+    //     NUM = NUM % DIV;
+    //     TAB[i] = BUF;
+    //     DIV = DIV / 10;
+    //     cout << TAB[i] << endl;
+    //     i++;
+    // } while (i<4);
+    
     return 0;
 }
-                                                                                              </html>
+        
+
 
