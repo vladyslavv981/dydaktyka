@@ -185,6 +185,7 @@ Informatyk mówi:</legend>
 <A HREF="pocztaVorokh.html">Poczta </A><br>
 
 <A HREF="Plik_Vorokh.html">Plik </A><br>
+  
 
 <A HREF="Tabela_Vorokh.html">Tabela </A><br>
 
@@ -194,3 +195,91 @@ Informatyk mówi:</legend>
   
  </body>
 </html>
+
+#include <iostream>
+#include <string>
+#include <cmath>
+#include <limits> // dla numeric_limits
+using namespace std;
+
+// 1. Funkcja: sprawdza płeć na podstawie imienia (prosta heurystyka)
+string plec(const string& imie_in) {
+    if (imie_in.empty()) return "Nie podano imienia.";
+    // skopiuj i ustandaryzuj (małe litery) - ale prosty sposób:
+    string imie = imie_in;
+    // sprawdź ostatni znak bez ryzyka przy pustym stringu
+    char ostatni = imie.back();
+    // uwzględnienie małej/wielkiej litery
+    if (ostatni == 'a' || ostatni == 'A') {
+        // wyjątkowy przypadek: "Kuba" - prosta obsługa (możesz rozszerzyć)
+        if (imie == "Kuba" || imie == "kuba") return "To chłopak.";
+        return "To dziewczyna.";
+    } else {
+        return "To chłopak.";
+    }
+}
+
+// 2. Funkcja: oblicza średnią z 5 liczb i zwraca liczbę najbliższą średniej
+double najblizsza(double a, double b, double c, double d, double e) {
+    double liczby[5] = {a, b, c, d, e};
+    double suma = a + b + c + d + e;
+    double srednia = suma / 5.0;
+
+    double naj = liczby[0];
+    double min_roznica = fabs(liczby[0] - srednia);
+
+    for (int i = 1; i < 5; ++i) {
+        double roznica = fabs(liczby[i] - srednia);
+        if (roznica < min_roznica) {
+            min_roznica = roznica;
+            naj = liczby[i];
+        }
+    }
+    cout << "Średnia: " << srednia << endl;
+    return naj;
+}
+
+// 3. Funkcja: odwraca ciąg znaków (bez problemów z indeksem)
+string odwroc(const string& tekst) {
+    int n = static_cast<int>(tekst.size());
+    if (n == 0) return string();
+    string wynik;
+    wynik.reserve(n);
+    for (int i = n - 1; i >= 0; --i) {
+        wynik.push_back(tekst[i]);
+    }
+    return wynik;
+}
+
+int main() {
+    // 1) Imię
+    string imie;
+    cout << "Podaj imie: ";
+    if (!(cin >> imie)) {
+        cerr << "Blad wczytania imienia." << endl;
+        return 1;
+    }
+    cout << plec(imie) << endl << endl;
+
+    // 2) Pięć liczb
+    double a, b, c, d, e;
+    cout << "Podaj 5 liczb rzeczywistych oddzielonych spacjami: ";
+    if (!(cin >> a >> b >> c >> d >> e)) {
+        cerr << "Blad wczytania liczb." << endl;
+        return 1;
+    }
+    double naj = najblizsza(a, b, c, d, e);
+    cout << "Liczba najblizsza sredniej to: " << naj << endl << endl;
+
+    // Wyczyść bufor przed getline
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    // 3) Ciag znakow
+    string tekst;
+    cout << "Podaj ciag znakow (moze zawierac spacje): ";
+    getline(cin, tekst);
+    cout << "Odwrócony ciag: " << odwroc(tekst) << endl;
+
+    return 0;
+}
+
