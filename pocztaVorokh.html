@@ -15,67 +15,45 @@
         #include <iostream>
 #include <string>
 #include <cmath>
-#include <limits>
 using namespace std;
 
-// 1. Funkcja: określa płeć na podstawie imienia
-string plec(string imie) {
-    if (imie.length() == 0) return "Nie podano imienia.";
-
-    char ostatni = imie[imie.length() - 1]; // bez .back()
-    if ((ostatni == 'a' || ostatni == 'A') && imie != "Kuba" && imie != "kuba")
-        return "To dziewczyna.";
-    else
-        return "To chłopak.";
-}
-
-// 2. Funkcja: oblicza średnią i zwraca liczbę najbliższą średniej
-double najblizsza(double a, double b, double c, double d, double e) {
-    double liczby[5] = {a, b, c, d, e};
-    double srednia = (a + b + c + d + e) / 5.0;
-
-    double naj = liczby[0];
-    double min_roznica = fabs(liczby[0] - srednia);
-
-    for (int i = 1; i < 5; i++) {
-        double roznica = fabs(liczby[i] - srednia);
-        if (roznica < min_roznica) {
-            min_roznica = roznica;
-            naj = liczby[i];
-        }
-    }
-
-    cout << "Średnia: " << srednia << endl;
-    return naj;
-}
-
-// 3. Funkcja: odwraca ciąg znaków
-string odwroc(string tekst) {
-    string wynik = "";
-    for (int i = tekst.length() - 1; i >= 0; i--) {
-        wynik = wynik + tekst[i];
-    }
-    return wynik;
-}
-
-// --- Funkcja główna ---
-int main() {
+// Funkcja 1: Określa płeć na podstawie ostatniej litery imienia
+string plec() {
     string imie;
     cout << "Podaj imie: ";
     cin >> imie;
-    cout << plec(imie) << endl << endl;
+    char ostatnia = imie[imie.length() - 1]; // używamy indeksu zamiast back()
+    if (ostatnia == 'a' || ostatnia == 'A') return "Kobieta";
+    else return "Chlopak";
+}
 
+// Funkcja 2: Wczytuje 5 liczb i zwraca najbliższą średniej
+double najblizszaSredniej() {
     double a, b, c, d, e;
-    cout << "Podaj 5 liczb rzeczywistych: ";
+    cout << "Podaj 5 liczb: ";
     cin >> a >> b >> c >> d >> e;
-    cout << "Liczba najblizsza sredniej to: " << najblizsza(a, b, c, d, e) << endl << endl;
+    double srednia = (a + b + c + d + e) / 5;
+    double najblizsza = a;
+    if (abs(b - srednia) < abs(najblizsza - srednia)) najblizsza = b;
+    if (abs(c - srednia) < abs(najblizsza - srednia)) najblizsza = c;
+    if (abs(d - srednia) < abs(najblizsza - srednia)) najblizsza = d;
+    if (abs(e - srednia) < abs(najblizsza - srednia)) najblizsza = e;
+    return najblizsza;
+}
 
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // czyszczenie bufora
-
-    string tekst;
+// Funkcja 3: Odwraca ciąg znaków
+string odwroc() {
+    string s, odw = "";
     cout << "Podaj ciag znakow: ";
-    getline(cin, tekst);
-    cout << "Odwrocony ciag: " << odwroc(tekst) << endl;
+    cin.ignore(); // ignoruje pozostały znak nowej linii
+    getline(cin, s);
+    for (int i = s.length() - 1; i >= 0; i--) odw += s[i];
+    return odw;
+}
 
+int main() {
+    cout << "Funkcja 1: " << plec() << endl;
+    cout << "Funkcja 2: Najblizsza sredniej: " << najblizszaSredniej() << endl;
+    cout << "Funkcja 3: Odwrocony ciag: " << odwroc() << endl;
     return 0;
 }
