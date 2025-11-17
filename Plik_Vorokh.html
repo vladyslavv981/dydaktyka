@@ -169,3 +169,28 @@ document.write("y3="+y3_kow.toFixed(2)+"<br>");
 </div>
 </body>
     </html>
+
+
+
+
+         Ćwiczenie 1 – Odpowiedź krótka
+
+Tabela nie spełnia 1NF, bo pole Dane_osobowe zawiera kilka informacji naraz (imię, nazwisko, adres).
+Po normalizacji trzeba podzielić je na osobne pola: imię, nazwisko, kod, miasto, ulica.
+
+
+---
+
+Ćwiczenie 2 – Odpowiedź krótka
+
+Tabela nie spełnia 2NF, bo adres opiekuna powtarza się w wielu wierszach i nie zależy od zwierzęcia.
+Po normalizacji oddziela się zwierzęta i opiekunów do osobnych tabel.
+
+
+---
+
+Ćwiczenie 3 – Odpowiedź krótka
+
+Tabela nie spełnia 3NF, bo pole „czy jest mistrzem” zależy od zawodnika, a nie od danych o konkretnych zawodach.
+Po normalizacji zawodnicy i zawody powinny być w osobnych tabelach.
+
