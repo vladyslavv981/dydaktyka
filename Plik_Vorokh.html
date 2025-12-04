@@ -42,5 +42,60 @@ int main()
     return 0;
 }
 
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    ifstream plik;
+    plik.open("liczby.txt");
+    if(!plik.good())
+    {
+        cout<<"Brak pliku!" << endl;
+        return 0;
+    }
+
+    int tab[1003];
+    int n=0;
+
+    while(!plik.fail())
+    {
+        plik>>tab[n];
+        if (!plik.fail())
+            n++;
+    }
+    plik.close();
+
+    // a) ilosc liczb
+    cout<<"Ilosc liczb: "<<n<<endl;
+
+    // b) srednia
+    double suma=0;
+    for(int i=0;i<n;i++)
+        suma+=tab[i];
+
+    double srednia=suma/n;
+    cout << "Srednia: " << srednia << endl;
+
+    // c) odchylenie standardowe
+    double odchylenie = 0;
+    for(int i=0;i<n;i++)
+        odchylenie += (tab[i] - srednia) * (tab[i] - srednia);
+
+    odchylenie = sqrt(odchylenie / n);
+    cout << "Odchylenie standardowe: " << odchylenie << endl;
+
+    // d) liczby podzielne przez 3
+    int podzielne3 = 0;
+    for(int i=0;i<n;i++)
+        if(tab[i] % 3 == 0)
+            podzielne3++;
+
+    cout << "Podzielne przez 3: " << podzielne3 << endl;
+
+    return 0;
+}
 
 
