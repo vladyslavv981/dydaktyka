@@ -12,5 +12,129 @@
 </html>
 
 
+#include <iostream>
+#include <fstream>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+    ifstream plik;
+    plik.open("liczby.txt");
+    if(!plik.good())
+    {
+        cout<<"Brak pliku!" << endl;
+        return 0;
+    }
+
+    int tab[1003];
+    int n=0;
+
+    while(!plik.fail())
+    {
+        plik>>tab[n];
+        if (!plik.fail())
+            n++;
+    }
+    plik.close();
+
+    // a) ilosc liczb
+    cout<<"Ilosc liczb: "<<n<<endl;
+
+    // b) srednia
+    double suma=0;
+    for(int i=0;i<n;i++)
+        suma+=tab[i];
+
+    double srednia=suma/n;
+    cout << "Srednia: " << srednia << endl;
+
+    // c) odchylenie standardowe
+    double odchylenie = 0;
+    for(int i=0;i<n;i++)
+        odchylenie += (tab[i] - srednia) * (tab[i] - srednia);
+
+    odchylenie = sqrt(odchylenie / n);
+    cout << "Odchylenie standardowe: " << odchylenie << endl;
+
+    // d) podzielne przez 3
+    int podzielne3 = 0;
+    for(int i=0;i<n;i++)
+        if(tab[i] % 3 == 0)
+            podzielne3++;
+
+    cout << "Podzielne przez 3: " << podzielne3 << endl;
+
+    // e) najmniejsza i najwieksza
+    int min = tab[0];
+    int max = tab[0];
+    for(int i=0;i<n;i++)
+    {
+        if(tab[i] < min) min = tab[i];
+        if(tab[i] > max) max = tab[i];
+    }
+    cout << "Najmniejsza: " << min << endl;
+    cout << "Najwieksza: " << max << endl;
+
+    // f) dwucyfrowe
+    int dwucyfrowe = 0;
+    for(int i=0;i<n;i++)
+        if((tab[i] >= 10 && tab[i] <= 99) || (tab[i] <= -10 && tab[i] >= -99))
+            dwucyfrowe++;
+
+    cout << "Dwucyfrowe: " << dwucyfrowe << endl;
+
+    // g) czterocyfrowe zakonczone na 4
+    int czterocyfrowe4 = 0;
+    for(int i=0;i<n;i++)
+    {
+        int a = abs(tab[i]);
+        if(a >= 1000 && a <= 9999 && a % 10 == 4)
+            czterocyfrowe4++;
+    }
+
+    cout << "4-cyfrowe zakonczone na 4: " << czterocyfrowe4 << endl;
+
+    // h) symetryczne
+    int symetryczne = 0;
+    for(int i=0;i<n;i++)
+    {
+        int x = abs(tab[i]);
+        int odw = 0;
+        int tmp = x;
+
+        while(tmp > 0)
+        {
+            odw = odw * 10 + tmp % 10;
+            tmp = tmp / 10;
+        }
+
+        if(odw == x)
+            symetryczne++;
+    }
+
+    cout << "Symetryczne: " << symetryczne << endl;
+
+    // i) pierwsze
+    int pierwsze = 0;
+    for(int i=0;i<n;i++)
+    {
+        int x = tab[i];
+        if(x > 1)
+        {
+            int dzielniki = 0;
+            for(int j=2;j<=sqrt(x);j++)
+                if(x % j == 0)
+                    dzielniki++;
+
+            if(dzielniki == 0)
+                pierwsze++;
+        }
+    }
+
+    cout << "Pierwsze: " << pierwsze << endl;
+
+    return 0;
+}
 
 
