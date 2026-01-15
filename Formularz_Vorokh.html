@@ -158,128 +158,64 @@
 </body>
 </html>
 #include <iostream>
-#include <cmath> // Możliwe, że była, chociaż nieużywana w widocznym kodzie
+#include <windows.h>
 using namespace std;
 
-int main() {
-    int NUM, TAB[4], BUF, DIV=1000;
-    cout << "podaj liczbe: ";
-    cin >> NUM;
+int main()
+{
+    string haslo;
+    string ukryte;
+    char litera;
+    int proby = 6;
+    bool wygrana = false;
 
-    // for (int i=0; i<4; i++) {
-    //     BUF = NUM / DIV;
-    //     NUM = NUM % DIV;
-    //     TAB[i] = BUF;
-    //     DIV = DIV / 10;
-    //     cout << TAB[i] << endl;
-    // }
-    
-    // int i=0;
-    // while (i<4) {
-    //     BUF = NUM / DIV;
-    //     NUM = NUM % DIV;
-    //     TAB[i] = BUF;
-    //     DIV = DIV / 10;
-    //     cout << TAB[i] << endl;
-    //     i++;
-    // }
-    
-    // int i=0;
-    // do {
-    //     BUF = NUM / DIV;
-    //     NUM = NUM % DIV;
-    //     TAB[i] = BUF;
-    //     DIV = DIV / 10;
-    //     cout << TAB[i] << endl;
-    //     i++;
-    // } while (i<4);
-    
-    return 0;
-}
+    cout << "Podaj haslo: ";
+    cin >> haslo;
 
+    system("cls"); // UKRYCIE HASLA
 
+    // Tworzenie ukrytego hasla
+    ukryte = haslo;
+    for (int i = 0; i < haslo.length(); i++)
+        ukryte[i] = '_';
 
+    // Główna pętla gry
+    while (proby > 0 && !wygrana)
+    {
+        cout << "Haslo: ";
+        for (int i = 0; i < ukryte.length(); i++)
+            cout << ukryte[i] << " ";
+        cout << endl;
 
+        cout << "Pozostale proby: " << proby << endl;
+        cout << "Podaj litere: ";
+        cin >> litera;
 
+        bool trafiona = false;
 
-
-        #include <iostream>
-#include <string>
-#include <cmath>
-using namespace std;
-
-// 1. Funkcja określająca płeć
-string okreslPlec(string imie) {
-    if (imie.empty()) return "Nie podano imienia.";
-    
-    // Zamiana pierwszej litery na wielką, reszty na małe
-    imie[0] = toupper(imie[0]);
-    for (size_t i = 1; i < imie.size(); i++)
-        imie[i] = tolower(imie[i]);
-
-    if (imie.back() == 'a' && imie != "Kuba")
-        return imie + " to dziewczyna.";
-    else
-        return imie + " to chłopak.";
-}
-
-// 2. Funkcja obliczająca średnią i zwracająca liczbę najbliższą średniej
-double najblizszaSredniej(double liczby[], int n) {
-    double suma = 0;
-    for (int i = 0; i < n; i++)
-        suma += liczby[i];
-    double srednia = suma / n;
-
-    double najblizsza = liczby[0];
-    double min_roznica = fabs(liczby[0] - srednia);
-
-    for (int i = 1; i < n; i++) {
-        double roznica = fabs(liczby[i] - srednia);
-        if (roznica < min_roznica) {
-            min_roznica = roznica;
-            najblizsza = liczby[i];
+        for (int i = 0; i < haslo.length(); i++)
+        {
+            if (haslo[i] == litera)
+            {
+                ukryte[i] = litera;
+                trafiona = true;
+            }
         }
+
+        if (!trafiona)
+            proby--;
+
+        if (ukryte == haslo)
+            wygrana = true;
+
+        system("cls");
     }
 
-    cout << "Średnia: " << srednia << endl;
-    return najblizsza;
-}
+    if (wygrana)
+        cout << "Wygrales! Haslo to: " << haslo << endl;
+    else
+        cout << "Przegrales! Haslo to: " << haslo << endl;
 
-// 3. Funkcja odwracająca ciąg znaków
-string odwrocCiag(string ciag) {
-    string odwrocony = "";
-    for (int i = ciag.size() - 1; i >= 0; i--)
-        odwrocony += ciag[i];
-    return odwrocony;
-}
-
-int main() {
-    // 1. Określanie płci
-    string imie;
-    cout << "Podaj imię: ";
-    cin >> imie;
-    cout << okreslPlec(imie) << endl << endl;
-
-    // 2. Średnia i liczba najbliższa średniej
-    double liczby[5];
-    cout << "Podaj 5 liczb rzeczywistych:\n";
-    for (int i = 0; i < 5; i++) {
-        cout << "Liczba " << i + 1 << ": ";
-        cin >> liczby[i];
-    }
-    double wynik = najblizszaSredniej(liczby, 5);
-    cout << "Liczba najbliższa średniej to: " << wynik << endl << endl;
-
-    // 3. Odwracanie ciągu znaków
-    string ciag;
-    cout << "Podaj ciąg znaków: ";
-    cin.ignore(); // czyszczenie bufora
-    getline(cin, ciag);
-    cout << "Odwrócony ciąg: " << odwrocCiag(ciag) << endl;
-
+    system("pause");
     return 0;
 }
-        
-
-
-
