@@ -158,64 +158,63 @@
 </body>
 </html>
 #include <iostream>
-#include <windows.h>
 using namespace std;
 
-int main()
-{
-    string haslo;
-    string ukryte;
-    char litera;
-    int proby = 6;
-    bool wygrana = false;
+int main(int argc, const char * argv[]) {
 
-    cout << "Podaj haslo: ";
-    cin >> haslo;
+    // program ma pokazać ile procent głosów uzyskał każdy z kandydatów
+    // ma też odpowiedzieć, kto wygrał
 
-    system("cls"); // UKRYCIE HASLA
+    string kandydat[10]={"Ala","Ola","Ela","Jan","Ewa","Iza","Adam","Ula","Piotr","Darek"};
+    int glosy[10]={100,123,112,129,139,141,129,118,119,135};
+    float procent[10];
 
-    // Tworzenie ukrytego hasla
-    ukryte = haslo;
-    for (int i = 0; i < haslo.length(); i++)
-        ukryte[i] = '_';
+    int mx = glosy[0], k = 0; // największa liczba głosów
+    int mn = glosy[0], j = 0; // najmniejsza liczba głosów
 
-    // Główna pętla gry
-    while (proby > 0 && !wygrana)
+    float suma = 0, suma_procent = 0;
+
+    cout << "Wybory samorzadowe\n";
+
+    // obliczanie sumy głosów
+    for(int i=0;i<10;i++)
+        suma += glosy[i];
+
+    cout << "SUMA=" << suma << endl;
+
+    // obliczanie procentów
+    for(int i=0;i<10;i++)
     {
-        cout << "Haslo: ";
-        for (int i = 0; i < ukryte.length(); i++)
-            cout << ukryte[i] << " ";
-        cout << endl;
+        procent[i] = glosy[i] * 100.0 / suma;
+        suma_procent += procent[i];
 
-        cout << "Pozostale proby: " << proby << endl;
-        cout << "Podaj litere: ";
-        cin >> litera;
-
-        bool trafiona = false;
-
-        for (int i = 0; i < haslo.length(); i++)
-        {
-            if (haslo[i] == litera)
-            {
-                ukryte[i] = litera;
-                trafiona = true;
-            }
-        }
-
-        if (!trafiona)
-            proby--;
-
-        if (ukryte == haslo)
-            wygrana = true;
-
-        system("cls");
+        cout << kandydat[i] << " - " << glosy[i] << " glosow - "
+             << procent[i] << " %\n";
     }
 
-    if (wygrana)
-        cout << "Wygrales! Haslo to: " << haslo << endl;
-    else
-        cout << "Przegrales! Haslo to: " << haslo << endl;
+    // szukanie największej i najmniejszej liczby głosów
+    for(int i=1;i<10;i++)
+    {
+        if(glosy[i] > mx)
+        {
+            mx = glosy[i];
+            k = i;
+        }
 
-    system("pause");
+        if(glosy[i] < mn)
+        {
+            mn = glosy[i];
+            j = i;
+        }
+    }
+
+    cout << "SUMA % = " << suma_procent << endl;
+
+    cout << "WYGRYWA:\n";
+    cout << kandydat[k] << " liczba glosow " << mx << " co daje " << procent[k] << " %\n";
+
+    cout << "OSTATNIE MIEJSCE:\n";
+    cout << kandydat[j] << " liczba glosow " << mn << endl;
+
     return 0;
 }
