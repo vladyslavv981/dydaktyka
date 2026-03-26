@@ -13,28 +13,73 @@
 
 
 #include <iostream>
-
 using namespace std;
 
 int main()
 {
-    int mecze[12][6]={
-        //           a-b a-c b-c
-                    {1,2,3,2,4,3};
-                    {1,1,1,2,2,3};
-                    {1,3,2,2,3,3};
-                    {4,2,0,3,5,4};
-                    {4,2,0,0,1,3};
-                    {2,2,2,2,3,3};
-                    {3,2,1,3,2,1};
-                    {1,0,0,2,0,3};
-                    {2,1,3,2,1,1};
-                    {0,0,2,3,4,4};
+    int mecze[10][6]={
+        {1,2,3,2,4,3},
+        {1,1,1,2,2,3},
+        {1,3,2,2,3,3},
+        {4,2,0,3,5,4},
+        {4,2,0,0,1,3},
+        {2,2,2,2,3,3},
+        {3,2,1,3,2,1},
+        {1,0,0,2,0,3},
+        {2,1,3,2,1,1},
+        {0,0,2,3,4,4}
+    };
+
+    int pktA=0, pktB=0, pktC=0;
+    int goleA=0, goleB=0, goleC=0;
+    int straconeA=0, straconeB=0, straconeC=0;
+    int remisy=0;
+
+    for(int i=0; i<10; i++)
+    {
+        int a = mecze[i][0];
+        int b = mecze[i][1];
+
+        goleA += a; straconeA += b;
+        goleB += b; straconeB += a;
+
+        if(a > b) pktA += 3;
+        else if(a < b) pktB += 3;
+        else { pktA++; pktB++; remisy++; }
+
+        a = mecze[i][2];
+        int c = mecze[i][3];
+
+        goleA += a; straconeA += c;
+        goleC += c; straconeC += a;
+
+        if(a > c) pktA += 3;
+        else if(a < c) pktC += 3;
+        else { pktA++; pktC++; remisy++; }
+
+        b = mecze[i][4];
+        c = mecze[i][5];
+
+        goleB += b; straconeB += c;
+        goleC += c; straconeC += b;
+
+        if(b > c) pktB += 3;
+        else if(b < c) pktC += 3;
+        else { pktB++; pktC++; remisy++; }
     }
-    // za wygranš 3 pkt, za remis 1, za przegranš 0
-    /*Kto wygrał, ile bramek zdobyła a,b,c, ile było
-      remisów, bilans bramek
-    */
-    cout << "Hello world!" << endl;
+
+    cout << "A: " << pktA << endl;
+    cout << "B: " << pktB << endl;
+    cout << "C: " << pktC << endl;
+
+    cout << goleA << " " << goleB << " " << goleC << endl;
+    cout << goleA - straconeA << " " << goleB - straconeB << " " << goleC - straconeC << endl;
+    cout << remisy << endl;
+
+    if(pktA > pktB && pktA > pktC) cout << "A";
+    else if(pktB > pktA && pktB > pktC) cout << "B";
+    else if(pktC > pktA && pktC > pktB) cout << "C";
+    else cout << "REMIS";
+
     return 0;
 }
